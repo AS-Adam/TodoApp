@@ -7,7 +7,7 @@ export default function ToDO() {
     return (
         <div>
             <p>
-                {history.id}
+                {history.name}
             </p>
         </div>)
 }

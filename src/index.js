@@ -20,7 +20,7 @@ function Wrapper() {
           <Route path="/login">
             <PublicPage isLogged={isLogged} setIsLogged={setIsLogged} />
           </Route>
-          <Route path="/test/:id/">
+          <Route path="/test/:id/:name">
             <ToDo />
           </Route>
         </Switch>

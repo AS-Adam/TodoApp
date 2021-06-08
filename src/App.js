@@ -11,7 +11,7 @@ function TaskInput({ todo, dispatch }) {
   return (
     <div>
       <span onClick={() => {
-        history.push(`/test/${todo.id}`)
+        history.push(`/test/${todo.id}/${todo.name}`)
         // return ShowToDos({ todo })
       }}>
         {todo.name}
@@ -41,22 +41,30 @@ const ACTIONS = {
 function doneTasksReducer(allTodos, action) {
   switch (action.type) {
     case ACTIONS.ADDTODO:
-      return [...allTodos, newTodo(action.payload.name)];;
+      allTodos = [...allTodos, newTodo(action.payload.name)];
+      showAllTasks(allTodos)
+      return allTodos;
     case ACTIONS.TOGGLETODO:
-      return allTodos.map(todo => {
+      allTodos = allTodos.map(todo => {
         if (todo.id === action.payload.id) {
           return { ...todo, complete: !todo.complete };
         }
         return todo;
-      });
+      })
+      showAllTasks(allTodos)
+      return allTodos;
     case ACTIONS.DELETE:
-      return allTodos.filter(todo =>
-        todo.id !== action.payload.id
-      );
+      allTodos = allTodos.filter(todo =>
+        todo.id !== action.payload.id)
+      showAllTasks(allTodos)
+      return allTodos;
     case ACTIONS.REMOVEALL:
+      allTasks = [];
       return [];
     case ACTIONS.FILTERDONE:
-      return allTodos.filter(todo => todo.complete === true);
+      allTodos = allTodos.filter(todo => todo.complete === true);
+      showAllTasks(allTodos)
+      return (allTodos);
     case ACTIONS.SHOWALLTASKS:
       console.log(allTasks);
       return allTasks;
@@ -68,19 +76,24 @@ function allTasksReducer(allTodos, action) {
   switch (action.type) {
     case ACTIONS.ADDTODO:
       allTodos = [...allTodos, newTodo(action.payload.name)];
+      showAllTasks(allTodos)
       return allTodos;
     case ACTIONS.TOGGLETODO:
-      return allTodos.map(todo => {
+      allTodos = allTodos.map(todo => {
         if (todo.id === action.payload.id) {
           return { ...todo, complete: !todo.complete };
         }
         return todo;
-      });
+      })
+      showAllTasks(allTodos)
+      return allTodos;
     case ACTIONS.DELETE:
-      return allTodos.filter(todo =>
-        todo.id !== action.payload.id
-      );
+      allTodos = allTodos.filter(todo =>
+        todo.id !== action.payload.id)
+      showAllTasks(allTodos)
+      return allTodos;
     case ACTIONS.REMOVEALL:
+      allTasks = [];
       return [];
     case ACTIONS.FILTERDONE:
       let list = showAllTasks(allTodos)
