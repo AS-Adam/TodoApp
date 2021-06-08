@@ -3,10 +3,37 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Switch, Route, } from "react-router-dom";
+import PublicPage from "./PublicPage";
+import AuthProvider from "./AuthProvider";
+import ToDo from "./ToDo";
 
+function Wrapper(props) {
+  const [isLogged, setIsLogged] = React.useState(false);
+
+  return (
+    <div>
+      <AuthProvider>
+        <Switch>
+          <Route path="/todo">
+            <App isLogged={isLogged} setIsLogged={setIsLogged} />
+          </Route>
+          <Route path="/login">
+            <PublicPage isLogged={isLogged} setIsLogged={setIsLogged} />
+          </Route>
+          <Route path="/test/:id/">
+            <ToDo />
+          </Route>
+        </Switch>
+      </AuthProvider>
+    </div>
+  );
+}
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Wrapper></Wrapper>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
