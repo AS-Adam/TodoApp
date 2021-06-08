@@ -1,6 +1,6 @@
 import *as React from "react";
-import { useHistory, useParams } from "react-router-dom";
-import TaskInput from "./App";
+import { useParams } from "react-router-dom";
+
 export default function ToDO() {
     const history = useParams();
     console.log(history);

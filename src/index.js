@@ -8,9 +8,8 @@ import PublicPage from "./PublicPage";
 import AuthProvider from "./AuthProvider";
 import ToDo from "./ToDo";
 
-function Wrapper(props) {
+function Wrapper() {
   const [isLogged, setIsLogged] = React.useState(false);
-
   return (
     <div>
       <AuthProvider>
