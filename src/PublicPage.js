@@ -17,7 +17,7 @@ export default function PublicPage(props) {
 
         history.replace("/todo");
         return props.setIsLogged(true);
-    }
+    };
     return (
         <div>
             <h1>Welcome Welcome</h1>

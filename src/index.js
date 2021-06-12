@@ -1,28 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
+import App2 from './App2';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Switch, Route, } from "react-router-dom";
 import PublicPage from "./PublicPage";
 import AuthProvider from "./AuthProvider";
 import ToDo from "./ToDo";
+import TasksProvider from "./TaskProvider";
 
-function Wrapper() {
+function Wrapper(props) {
   const [isLogged, setIsLogged] = React.useState(false);
   return (
     <div>
       <AuthProvider>
         <Switch>
-          <Route path="/todo">
-            <App isLogged={isLogged} setIsLogged={setIsLogged} />
-          </Route>
-          <Route path="/login">
-            <PublicPage isLogged={isLogged} setIsLogged={setIsLogged} />
-          </Route>
-          <Route path="/test/:id/:name">
-            <ToDo />
-          </Route>
+          <TasksProvider>
+            <Route path="/todo">
+              <App2 />
+            </Route>
+            <Route path="/login">
+              <PublicPage isLogged={isLogged} setIsLogged={setIsLogged} />
+            </Route>
+            <Route path="/test/:id">
+              <ToDo />
+            </Route>
+          </TasksProvider>
         </Switch>
       </AuthProvider>
     </div>
